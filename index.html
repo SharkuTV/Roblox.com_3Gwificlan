@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="3G wifi clan — a Roblox group.">
+  <meta name="theme-color" content="#0066ff">
+  <title>3G wifi clan - Roblox Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #393b3d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .top-nav {
+      height: 48px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e3e5e8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 32px; }
+
+    .roblox-logo { display: flex; align-items: center; justify-content: center; }
+
+    .roblox-logo svg {
+      height: 22px;
+      width: 22px;
+      fill: #191b1c;
+      transition: fill 0.15s ease;
+    }
+
+    .roblox-logo:hover svg { fill: #000000; }
+
+    .nav-links { display: flex; align-items: center; gap: 48px; }
+
+    .nav-link {
+      font-size: 15px;
+      font-weight: 600;
+      color: #191b1c;
+      transition: opacity 0.15s ease;
+    }
+
+    .nav-link:hover { opacity: 0.75; }
+
+    .nav-center { flex: 1; max-width: 440px; margin: 0 24px; }
+
+    .search-form { position: relative; width: 100%; }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      stroke: #757575;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 32px;
+      background-color: #f2f4f5;
+      border: 1px solid #dcdfe4;
+      border-radius: 6px;
+      padding: 0 12px 0 36px;
+      font-size: 14px;
+      color: #393b3d;
+      outline: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .search-input:focus { background-color: #ffffff; border-color: #0066ff; }
+
+    .search-input::placeholder { color: #757575; font-weight: 500; }
+
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+
+    .btn-signup {
+      background-color: #0066ff;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-signup:hover { background-color: #0052cc; }
+
+    .btn-login {
+      background-color: transparent;
+      color: #393b3d;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn-login:hover { background-color: #f2f4f5; border-color: #a0a6aa; }
+
+    .nav-user { font-size: 14px; font-weight: 600; color: #393b3d; white-space: nowrap; }
+    .nav-user strong { font-weight: 800; color: #191919; }
+
+    .main-wrapper {
+      max-width: 970px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+      flex: 1;
+    }
+
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .header-left { display: flex; gap: 20px; align-items: flex-start; }
+
+    .group-logo {
+      width: 120px;
+      height: 120px;
+      background-color: #f2f4f5;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .group-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .group-info { display: flex; flex-direction: column; gap: 4px; padding-top: 4px; }
+
+    .group-name { font-size: 28px; font-weight: 800; color: #191919; line-height: 1.2; }
+
+    .owner-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      color: #55585d;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .owner-name { color: #0055a5; font-weight: 600; }
+    .owner-name:hover { text-decoration: underline; }
+
+    .member-pill {
+      display: inline-flex;
+      align-items: center;
+      background-color: #f2f4f5;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #393b3d;
+      width: fit-content;
+      margin-top: 14px;
+    }
+
+    .header-right { padding-top: 4px; }
+
+    .more-options-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background-color: #e3e5e8;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .more-options-btn:hover { background-color: #d0d3d8; }
+    .more-options-btn svg { width: 18px; height: 18px; fill: #393b3d; }
+
+    .group-bio { font-size: 14px; color: #393b3d; margin-bottom: 24px; line-height: 1.4; }
+
+    .tabs-container {
+      border-bottom: 1px solid #e3e5e8;
+      display: flex;
+      gap: 32px;
+      margin-bottom: 32px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-container::-webkit-scrollbar { display: none; }
+
+    .tab-item {
+      padding: 0 0 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #55585d;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.15s ease;
+      background: none;
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .tab-item:hover { color: #000000; }
+
+    .tab-item[aria-selected="true"] { color: #000000; font-weight: 700; }
+
+    .tab-item[aria-selected="true"]::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #000000;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .tab-pane:focus { outline: none; }
+
+    .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .section-title { font-size: 20px; font-weight: 800; color: #191919; }
+
+    .see-all-link {
+      font-size: 15px;
+      font-weight: 700;
+      color: #191919;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .see-all-link:hover { opacity: 0.75; }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 0 80px;
+      color: #55585d;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .empty-state-icon {
+      margin-bottom: 12px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .empty-state-icon svg { width: 48px; height: 48px; stroke: #757575; fill: none; }
+
+    .footer {
+      border-top: 1px solid #e3e5e8;
+      padding: 28px 16px 40px;
+      background-color: #ffffff;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 970px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: #393b3d;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-link:hover { color: #0066ff; }
+
+    .privacy-choice-icon { display: inline-flex; align-items: center; margin-left: 2px; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid #0066ff;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-center { margin: 0 12px; max-width: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-center { display: none; }
+      .group-header { flex-direction: column; gap: 16px; }
+      .header-left { flex-direction: column; }
+      .group-logo { width: 88px; height: 88px; }
+      .group-name { font-size: 22px; }
+      .tabs-container { gap: 20px; }
+      .footer-content { gap: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="https://www.roblox.com" target="_blank" rel="noopener" class="roblox-logo" title="Roblox Home">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M18 0L100 22L82 100L0 78L18 0ZM42 38L58 42L54 58L38 54L42 38Z"/>
+        </svg>
+        <span class="sr-only">Roblox home</span>
+      </a>
+      <nav class="nav-links">
+        <a href="https://www.roblox.com/discover" target="_blank" rel="noopener" class="nav-link">Charts</a>
+        <a href="https://www.roblox.com/catalog" target="_blank" rel="noopener" class="nav-link">Marketplace</a>
+        <a href="https://create.roblox.com" target="_blank" rel="noopener" class="nav-link">Create</a>
+        <a href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener" class="nav-link">Robux</a>
+      </nav>
+    </div>
+
+    <div class="nav-center">
+      <form action="https://www.roblox.com/search/groups" method="GET" target="_blank" rel="noopener" class="search-form" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <label for="siteSearch" class="sr-only">Search Roblox groups</label>
+        <input type="search" id="siteSearch" name="keyword" class="search-input" placeholder="Search">
+      </form>
+    </div>
+
+    <div class="nav-right" id="navRight">
+      <a href="login.html" class="btn-signup">Sign Up</a>
+      <a href="login.html" class="btn-login">Log In</a>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <section class="group-header">
+      <div class="header-left">
+        <div class="group-logo">
+          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300&auto=format&fit=crop&q=80" alt="3G wifi clan router logo">
+        </div>
+
+        <div class="group-info">
+          <h1 class="group-name">3G wifi clan</h1>
+
+          <div class="owner-row">
+            <span>By <a href="https://www.roblox.com/users/9909894785/profile" target="_blank" rel="noopener" class="owner-name">3G_4X</a></span>
+          </div>
+
+          <div class="member-pill">2.6K Members</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="more-options-btn" aria-label="More options" aria-haspopup="menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="6" cy="12" r="2.5"/>
+            <circle cx="12" cy="12" r="2.5"/>
+            <circle cx="18" cy="12" r="2.5"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <div class="group-bio">No bio yet.</div>
+
+    <nav class="tabs-container" role="tablist" aria-label="Group sections">
+      <button class="tab-item" role="tab" id="tab-home" aria-controls="pane-home" aria-selected="true" tabindex="0">Home</button>
+      <button class="tab-item" role="tab" id="tab-posts" aria-controls="pane-posts" aria-selected="false" tabindex="-1">Posts</button>
+      <button class="tab-item" role="tab" id="tab-events" aria-controls="pane-events" aria-selected="false" tabindex="-1">Events</button>
+      <button class="tab-item" role="tab" id="tab-store" aria-controls="pane-store" aria-selected="false" tabindex="-1">Store</button>
+      <button class="tab-item" role="tab" id="tab-affiliates" aria-controls="pane-affiliates" aria-selected="false" tabindex="-1">Affiliates</button>
+    </nav>
+
+    <div id="pane-home" class="tab-pane active" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
+      <div class="section-header-row">
+        <h2 class="section-title">Announcements</h2>
+      </div>
+      <div class="empty-state" style="padding-top: 20px;">No announcements yet...</div>
+    </div>
+
+    <div id="pane-posts" class="tab-pane" role="tabpanel" aria-labelledby="tab-posts" tabindex="0">
+      <h2 class="section-title" style="margin-bottom: 24px;">Announcements</h2>
+      <div class="empty-state">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+          </svg>
+        </div>
+        <div>No announcements yet...</div>
+      </div>
+    </div>
+
+    <div id="pane-events" class="tab-pane" role="tabpanel" aria-labelledby="tab-events" tabindex="0">
+      <h2 class="section-title" style="margin-bottom: 24px;">Events</h2>
+      <div class="empty-state">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+            <circle cx="12" cy="15" r="1.5" fill="#757575"></circle>
+          </svg>
+        </div>
+        <div style="font-weight: 700; color: #191919; margin-bottom: 4px; font-size: 16px;">No events for now</div>
+        <div style="color: #757575; font-size: 14px;">Check back later for new events</div>
+      </div>
+    </div>
+
+    <div id="pane-store" class="tab-pane" role="tabpanel" aria-labelledby="tab-store" tabindex="0">
+      <div class="section-header-row">
+        <h2 class="section-title">Store</h2>
+        <a href="#" class="see-all-link">See All <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="empty-state" style="padding-top: 10px;">No items are for sale in this community.</div>
+    </div>
+
+    <div id="pane-affiliates" class="tab-pane" role="tabpanel" aria-labelledby="tab-affiliates" tabindex="0">
+      <h2 class="section-title" style="margin-bottom: 24px;">Allies</h2>
+      <div class="empty-state" style="padding-top: 10px;">This community does not have any allies.</div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <a href="https://corp.roblox.com" target="_blank" rel="noopener" class="footer-link">About Us</a>
+      <a href="https://careers.roblox.com" target="_blank" rel="noopener" class="footer-link">Jobs</a>
+      <a href="https://corp.roblox.com/newsroom" target="_blank" rel="noopener" class="footer-link">Newsroom</a>
+      <a href="https://corp.roblox.com/parents" target="_blank" rel="noopener" class="footer-link">Parents</a>
+      <a href="https://www.roblox.com/giftcards" target="_blank" rel="noopener" class="footer-link">Buy Gift Cards</a>
+      <a href="https://en.help.roblox.com" target="_blank" rel="noopener" class="footer-link">Help</a>
+      <a href="https://en.help.roblox.com/hc/en-us/articles/115004647846" target="_blank" rel="noopener" class="footer-link">Terms</a>
+      <a href="https://en.help.roblox.com/hc/en-us/articles/115004647846" target="_blank" rel="noopener" class="footer-link">Accessibility</a>
+      <a href="https://www.roblox.com/info/privacy" target="_blank" rel="noopener" class="footer-link">Privacy</a>
+      <a href="https://www.roblox.com/info/privacy" target="_blank" rel="noopener" class="footer-link">
+        Your Privacy Choices
+        <span class="privacy-choice-icon" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 30 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.4 12.8h6.8l1.8-2.8h-8.6L7.4 12.8z" fill="#0066FF"/>
+            <path d="M22.6 1.2h-6.8l-1.8 2.8h8.6l-1.8-2.8z" fill="#0066FF"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15 0L0 7l15 7 15-7L15 0zm-1.2 4.4L7.5 7l6.3 2.6L20.1 7l-6.3-2.6z" fill="#0066FF"/>
+          </svg>
+        </span>
+      </a>
+      <a href="https://www.roblox.com/sitemap" target="_blank" rel="noopener" class="footer-link">Sitemap</a>
+    </div>
+  </footer>
+
+  <script>
+    var navRight = document.getElementById('navRight');
+    var tablist = document.querySelector('[role="tablist"]');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+
+    // Render logged-in / logged-out header from stored state
+    function renderAuth() {
+      var name = localStorage.getItem('username');
+      if (name) {
+        navRight.innerHTML = '<span class="nav-user">Hi, <strong></strong></span><button class="btn-login" type="button">Log Out</button>';
+        navRight.querySelector('strong').textContent = name;
+        navRight.querySelector('button').addEventListener('click', function () {
+          localStorage.removeItem('username');
+          localStorage.removeItem('loggedInAt');
+          renderAuth();
+        });
+      } else {
+        navRight.innerHTML = '<a href="login.html" class="btn-signup">Sign Up</a><a href="login.html" class="btn-login">Log In</a>';
+      }
+    }
+
+    function selectTab(name, focus) {
+      tabs.forEach(function (t) {
+        var on = t.id === 'tab-' + name;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (on && focus) t.focus();
+      });
+      document.querySelectorAll('.tab-pane').forEach(function (p) {
+        p.classList.toggle('active', p.id === 'pane-' + name);
+      });
+      history.replaceState(null, '', '#' + name);
+    }
+
+    tablist.addEventListener('click', function (e) {
+      var t = e.target.closest('[role="tab"]');
+      if (t) selectTab(t.id.slice(4), false);
+    });
+
+    tablist.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i === -1) return;
+      var next = null;
+      if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next !== null) {
+        e.preventDefault();
+        selectTab(tabs[next].id.slice(4), true);
+      }
+    });
+
+    var start = location.hash.slice(1);
+    if (start && document.getElementById('pane-' + start)) selectTab(start, false);
+
+    renderAuth();
+  </script>
+
+</body>
+</html>
