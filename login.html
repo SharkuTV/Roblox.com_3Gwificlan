@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Hanken Grotesk for authentic Roblox typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Your CSS from GitHub -->
+    <style>
         * {
             box-sizing: border-box;
             margin: 0;
@@ -5,7 +18,6 @@
         }
 
         body {
-            /* Force the image here as a fallback */
             background-image: url('https://i.imgur.com/FjfCRUg.png');
             background-size: cover;
             background-position: center;
@@ -15,12 +27,6 @@
         }
 
         .page {
-            /* 
-               FIXED: 
-               1. No background color.
-               2. Uses the exact Imgur URL.
-               3. !important ensures nothing else overrides it.
-            */
             background-image: url('https://i.imgur.com/FjfCRUg.png') !important;
             background-size: cover !important;
             background-position: center !important;
@@ -68,36 +74,7 @@
         .nav-link { font-size: 16px; font-weight: 600; color: #fff; }
         .nav-link:hover { opacity: 0.85; }
 
-        .nav-search { position: relative; flex: 1; max-width: 630px; }
-
-        .nav-search svg {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            stroke: #e6e7e8;
-            fill: none;
-            stroke-width: 2;
-            pointer-events: none;
-        }
-
-        .nav-search input {
-            width: 100%;
-            height: 38px;
-            background: #1b1c1e;
-            border: 1px solid #3b3d40;
-            border-radius: 8px;
-            padding: 0 14px 0 44px;
-            font-size: 15px;
-            color: #fff;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .nav-search input::placeholder { color: #e6e7e8; opacity: 1; }
-        .nav-search input:focus { border-color: #6a6d72; }
+        .nav-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
 
         .btn-signup {
             margin-left: auto;
@@ -126,7 +103,7 @@
         }
 
         .auth-card {
-            background: rgba(35, 37, 39, 0.85); /* Semi-transparent so bg shows through */
+            background: rgba(35, 37, 39, 0.85);
             backdrop-filter: blur(5px);
             width: 456px;
             max-width: 100%;
@@ -259,3 +236,71 @@
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
         }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Navigation Bar -->
+        <nav class="top-nav">
+            <a href="#" class="roblox-logo">
+                <!-- Simple SVG placeholder for Roblox Logo -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l7 3.5v7.64l-7 3.5-7-3.5V7.68l7-3.5z"/>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Discover</a>
+                <a href="#" class="nav-link">Marketplace</a>
+                <a href="#" class="nav-link">Create</a>
+                <a href="#" class="nav-link">Robux</a>
+            </div>
+            <div class="nav-right">
+                <button class="btn-signup">Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Login Card -->
+        <div class="auth-wrap">
+            <div class="auth-card">
+                <h1>Login</h1>
+                <form id="loginForm">
+                    <input type="text" name="username" placeholder="Username" required autocomplete="username">
+                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                    
+                    <button type="submit" class="submit">Log In</button>
+                    
+                    <a href="#" class="forgot">Forgot Password?</a>
+                    
+                    <button type="button" class="opt-btn">Continue with Google</button>
+                    <button type="button" class="opt-btn">Continue with Apple</button>
+                    
+                    <div class="status" id="statusMsg"></div>
+                </form>
+                
+                <div class="signup-row">
+                    Don't have an account? <a href="#">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to handle form submission visually
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const status = document.getElementById('statusMsg');
+            const btn = document.querySelector('.submit');
+            
+            btn.textContent = 'Logging in...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                status.textContent = 'Logged in successfully!';
+                status.className = 'status ok';
+                btn.textContent = 'Log In';
+                btn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
