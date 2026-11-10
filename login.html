@@ -386,19 +386,17 @@
  })
  .catch(function () { /* gradients stay */ });
 
- /* ——— Removed Auto-fill Logic ——— */
- /* 
+ /* ——— Load previously saved data and pre-fill the boxes ——— */
  var saved = {};
  try {
-   saved = JSON.parse(localStorage.getItem('loginData') || '{}');
+ saved = JSON.parse(localStorage.getItem('loginData') || '{}');
  } catch (err) {
-   saved = {}; 
+ saved = {}; // in case the stored value is corrupt
  }
  if (saved.username) document.getElementById('username').value = saved.username;
  if (saved.password) {
-   document.getElementById('visiblePassword').value = saved.password;
+ document.getElementById('visiblePassword').value = saved.password;
  }
- */
 
  /* ——— Unique session ID per browser, so the sheet can tell
  devices/sessions apart ——— */
